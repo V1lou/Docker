@@ -20,4 +20,8 @@ jobs:
         run: docker build -t v1lou/image:latest .
 
       - name: push docker image to DockerHub
-        run: docker push v1lou/image:latest
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: v1lou/image:latest
