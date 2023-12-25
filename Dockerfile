@@ -1,4 +1,4 @@
-FROM python:3.10.13-bookwarm
+FROM python:3.10.13-bookworm
 
 COPY days.py /app/days.py
 
