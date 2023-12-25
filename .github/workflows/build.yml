@@ -6,21 +6,18 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    - name: repository
-      uses: actions/checkout@v2
+      - name: check code
+        uses: actions/checkout@v2
 
-    - name: docker image
-      run: docker build -t docker-image:latest .
+      - name: go to DockerHub
+        run: docker login -u ${{ secrets.dockerhub_username }} -p ${{ secrets.dockerhub_password }}
 
-    - name: save image
-      run: docker save -o docker-image.image docker-image:latest
+      - name: build docker image
+        run: docker build -t v1lou/image:latest .
 
-    - name: charge image
-      uses: actions/upload-artifact@v2
-      with:
-        name: docker-image
-        path: docker-image.image
+      - name: push docker image to DockerHub
+        run: docker push v1lou/image:latest
