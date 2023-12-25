@@ -1,7 +1,7 @@
 FROM python:3.10
 
-WORKDIR /app/
+COPY days.py /app/days.py
 
-COPY . /app/
+WORKDIR /app
 
 CMD ["python", "days.py"]
