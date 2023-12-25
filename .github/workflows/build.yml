@@ -1,4 +1,4 @@
-name: Build and Save Docker Image
+name: docker-build
 
 on:
   push:
@@ -6,21 +6,21 @@ on:
       - main
 
 jobs:
-  build-and-save-docker-image:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: repository
+      uses: actions/checkout@v2
 
-      - name: Build Docker image
-        run: docker build -t my-image .
+    - name: docker image
+      run: docker build -t docker-image:latest .
 
-      - name: Save Docker image to file
-        run: docker save my-image -o my-image.tar
+    - name: save image
+      run: docker save -o docker-image.image docker-image:latest
 
-      - name: Upload image artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: my-image
-          path: my-image.tar
+    - name: charge image
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-image
+        path: docker-image.image
