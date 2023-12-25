@@ -4,20 +4,20 @@ on:
     branches:
       - 'main'
 jobs:
-  push_to_docker_hub:
-    name: Push image to Docker hub
+  build-and-push:
+    name: build and push
     runs-on: ubuntu-latest
     steps:
-      - name: checkout out the геро
+      - name: check code
         uses: actions/checkout@v4
         
-      - name: log in to docker hub
+      - name: go to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           
-      - name: build image and push
+      - name: push and build docker image to DockerHub
         uses: docker/build-push-action@v5
         with:
           context: .
